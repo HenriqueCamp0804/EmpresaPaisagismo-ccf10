@@ -7,7 +7,7 @@
 
 int main() {
     //declarando variaveis
-    int result;                                 //pergunta, eu posso declarar as variaveis q uso so na funcao apenas nas proprias funcoes?//
+    int result;
     tipoClientes dadosCliente[100];
     tipoVenda dadosVenda[100];
     int contaVenda = 0;
@@ -34,7 +34,7 @@ int main() {
             somaVenda(dadosVenda,contaVenda);
 
 
-        } else if (result == 6) { //como eu faria pra calcular o estoque de uma mesma planta q aparece em vendas diferentes
+        } else if (result == 6) {
             controleEstoque(dadosVenda,contaVenda);
 
         }else if (result == 7){
