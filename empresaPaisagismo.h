@@ -16,9 +16,9 @@ typedef struct{
 
 //criando struct endereco para aninhar no cadastro do cliente
 typedef struct{
-    char logradouro[100];
-    char cidade[50];
-    char bairro[50];
+    char logradouro[20];
+    char cidade[20];
+    char bairro[20];
     int numero;
     int cep;
 }tipoEndereco;
@@ -42,7 +42,7 @@ typedef struct{
 
 //criando struct para cadastro de cliente
 typedef struct{
-    char nome[100];
+    char nome[30];
     int ID;
     int telefone;
     tipoEndereco endereco;
@@ -63,7 +63,8 @@ int menuOpcoes(){
     printf("8 - Cadastrar Clientes\n");
     printf("9 - Controle de faturamento parcial\n");
     printf("10 - Verificar compra de algum cliente\n");
-    printf("11 - Sair\n");
+    printf("11 - Lista de clientes cadastrados\n");
+    printf("12 - Sair\n");
     printf("Opcao: ");
     scanf("%d",&opcao);
     return opcao;
@@ -238,41 +239,36 @@ void controleEstoque(tipoVenda dadosVenda[],int contaVenda) {
 }
 
 //funcao para realizar o cadastro de um cliente
-void cadastraCLiente() {
-    int i,numClientes_Cadast;
-    tipoClientes dadosCliente[100];
-    printf("Entre com a quantidade de clientes para cadastro:\n");
-    scanf("%d", &numClientes_Cadast);
-    for (i = 1; i < numClientes_Cadast + 1; i++) {
-        printf("Entre com o nome do cliente %d:\n", i);
-        fflush(stdin);
-        gets(dadosCliente[i].nome);
+void cadastraCLiente(tipoClientes dadosCliente[],int contaCliente) {
 
-        printf("Entre com o ID do cliente:\n");
-        scanf("%d",&dadosCliente[i].ID);
+    printf("Entre com o nome do cliente %d:\n", contaCliente);
+    fflush(stdin);
+    gets(dadosCliente[contaCliente].nome);
 
-        printf("Entre com o numero de telefone do cliente %d:\n", i);
-        scanf("%d", &dadosCliente[i].telefone);
+    printf("Entre com o ID do cliente %d:\n",contaCliente);
+    scanf("%d",&dadosCliente[contaCliente].ID);
 
-        printf("Entre com o logradouro do cliente %d:\n", i);
-        fflush(stdin);
-        gets(dadosCliente[i].endereco.logradouro);
+    printf("Entre com o numero de telefone do cliente %d:\n", contaCliente);
+    scanf("%d",&dadosCliente[contaCliente].telefone);
 
-        printf("Entre com a cidade do cliente %d:\n", i);
-        fflush(stdin);
-        gets(dadosCliente[i].endereco.cidade);
+    printf("Entre com o logradouro do cliente %d:\n", contaCliente);
+    fflush(stdin);
+    gets(dadosCliente[contaCliente].endereco.logradouro);
 
-        printf("Entre com o bairro do cliente %d:\n", i);
-        fflush(stdin);
-        gets(dadosCliente[i].endereco.bairro);
+    printf("Entre com a cidade do cliente %d:\n", contaCliente);
+    fflush(stdin);
+    gets(dadosCliente[contaCliente].endereco.cidade);
 
-        printf("Entre com o numero da residencia do cliente %d:\n", i);
-        scanf("%d", &dadosCliente[i].endereco.numero);
+    printf("Entre com o bairro do cliente %d:\n",contaCliente);
+    fflush(stdin);
+    gets(dadosCliente[contaCliente].endereco.bairro);
 
-        printf("Entre com o CEP,sem hifen e sem ponto, do cliente %d:\n", i);
-        scanf("%d", &dadosCliente[i].endereco.cep);
+    printf("Entre com o numero da residencia do cliente %d:\n", contaCliente);
+    scanf("%d",&dadosCliente[contaCliente].endereco.numero);
 
-    }
+    printf("Entre com o CEP,sem hifen e sem ponto, do cliente %d:\n", contaCliente);
+    scanf("%d",&dadosCliente[contaCliente].endereco.cep);
+
 }
 
 //funcao para receber o mes atual
@@ -353,6 +349,17 @@ void compraCliente(tipoVenda dadosVenda[],int contaVenda,tipoClientes dadosClien
                    dadosCliente[i].endereco.cidade,dadosCliente[i].endereco.numero,dadosCliente[i].endereco.cep);
         }
 
+    }
+}
+//funcao para imprimir lista de clientes
+void imprimirClientes(tipoClientes dadosCliente[], int contaCliente){
+    printf("---- CLIENTES ----\n");
+    for(int i=0;i<contaCliente;i++){
+        printf("\nCLIENTE %d:\n",i);
+        printf("\n| NOME: %s | TELEFONE: %d | ID: %d | ENDERECO: %s %s %s %d %d",dadosCliente[i].nome,
+               dadosCliente[i].telefone,dadosCliente[i].ID,dadosCliente[i].endereco.logradouro,
+               dadosCliente[i].endereco.cidade,dadosCliente[i].endereco.bairro,dadosCliente[i].endereco.numero,
+               dadosCliente[i].endereco.cep);
     }
 }
 
